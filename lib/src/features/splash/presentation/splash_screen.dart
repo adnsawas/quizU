@@ -20,7 +20,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       if (ref.read(authRepositoryProvider).isValidUser) {
         context.goNamed(AppRoute.home.name);
       } else {
-        context.goNamed(AppRoute.auth.name);
+        context.goNamed(AppRoute.intro.name);
       }
     });
     super.initState();

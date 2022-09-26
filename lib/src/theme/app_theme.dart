@@ -21,6 +21,12 @@ ThemeData appTheme(BuildContext context) {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(12))),
     ),
+    // dialogBackgroundColor: AppColors.cardBackgroundColor,
+    dialogTheme: const DialogTheme(
+      backgroundColor: AppColors.cardBackgroundColor,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(16))),
+    ),
     dividerColor: AppColors.primaryColor,
     indicatorColor: AppColors.primaryColor,
     navigationBarTheme: const NavigationBarThemeData(
@@ -39,5 +45,28 @@ ThemeData appTheme(BuildContext context) {
             MaterialStateProperty.all(Theme.of(context).textTheme.headline6),
       ),
     ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: ButtonStyle(
+          minimumSize: MaterialStateProperty.all(const Size(160, 50)),
+          shape: MaterialStateProperty.all(
+            const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(12),
+              ),
+            ),
+          ),
+          side: const MaterialStatePropertyAll(BorderSide(
+            color: AppColors.primaryColor,
+            width: 2,
+          )),
+          overlayColor: MaterialStatePropertyAll(
+              AppColors.primaryColor.withOpacity(0.25)),
+          textStyle:
+              MaterialStateProperty.all(Theme.of(context).textTheme.headline6),
+          foregroundColor: const MaterialStatePropertyAll(Colors.white)),
+    ),
+    inputDecorationTheme: const InputDecorationTheme(
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.secondaryColor))),
   );
 }

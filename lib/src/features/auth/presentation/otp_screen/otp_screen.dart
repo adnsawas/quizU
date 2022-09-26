@@ -55,6 +55,11 @@ class OtpScreen extends ConsumerWidget {
           const SizedBox(height: 40),
           const Center(child: CircularProgressIndicator()),
         ],
+        const SizedBox(height: 36),
+        ElevatedButton(
+            onPressed: () =>
+                ref.read(mainAuthStepIndexProvider.notifier).state = 0,
+            child: const Text('Back'))
       ],
     );
   }

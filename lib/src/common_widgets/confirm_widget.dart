@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_u/src/theme/app_colors.dart';
 
 Future<bool> showConfirmationDialog(
     {required BuildContext context, required String message}) async {
@@ -7,24 +8,27 @@ Future<bool> showConfirmationDialog(
     builder: (context) {
       return Dialog(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(32.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('Confirm',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  )),
+              Text('Confirm',
+                  style: Theme.of(context).textTheme.headline5!.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.secondaryColor)),
               const SizedBox(height: 16),
-              Text(message),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              Text(
+                message,
+                style: Theme.of(context).textTheme.headline6,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 36),
+              Column(
                 children: [
-                  ElevatedButton(
+                  OutlinedButton(
                       onPressed: () => Navigator.of(context).pop(false),
                       child: const Text('Cancel')),
+                  const SizedBox(height: 16),
                   ElevatedButton(
                       onPressed: () => Navigator.of(context).pop(true),
                       child: const Text('Confirm')),

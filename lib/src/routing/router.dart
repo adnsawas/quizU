@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quiz_u/src/features/auth/data/auth_repository.dart';
 import 'package:quiz_u/src/features/auth/presentation/main_auth_screen.dart';
+import 'package:quiz_u/src/features/intro/presentation/intro_screen.dart';
 import 'package:quiz_u/src/features/quiz/presentation/lose_screen.dart';
 import 'package:quiz_u/src/features/quiz/presentation/quiz_home_screen.dart';
 import 'package:quiz_u/src/features/home/presentaion/tabs_screen.dart';
@@ -16,6 +17,7 @@ import 'package:quiz_u/src/routing/router_refresh_stream.dart';
 enum AppRoute {
   splash,
   auth,
+  intro,
   home,
   leaderboard,
   profile,
@@ -36,12 +38,13 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       // Once authStateChanges changes, we would like to refresh the router
       refreshListenable: GoRouterRefreshStream(auth.authStateChanges()),
       redirect: (context, state) {
-        final userIsLogging =
-            state.location == '/auth' || state.location == '/';
+        final userIsLogging = state.location == '/auth' ||
+            state.location == '/' ||
+            state.location == '/intro';
         final userIsLoggedIn = auth.isValidUser;
         if (!userIsLogging && !userIsLoggedIn) {
           // redirect user to Login Screen
-          return '/auth';
+          return '/intro';
         }
         if (userIsLogging && !userIsLoggedIn) {
           // do not redirect the user
@@ -70,9 +73,14 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             child: MainAuthScreen(),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) =>
-                    FadeTransition(opacity: animation, child: child),
-            transitionDuration: const Duration(seconds: 3),
+                    ScaleTransition(scale: animation, child: child),
+            transitionDuration: const Duration(milliseconds: 500),
           ),
+        ),
+        GoRoute(
+          path: '/intro',
+          name: AppRoute.intro.name,
+          builder: (context, state) => IntroScreen(),
         ),
         ShellRoute(
           navigatorKey: _shellNavigatorKey,

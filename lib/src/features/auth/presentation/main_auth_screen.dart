@@ -27,10 +27,10 @@ class MainAuthScreen extends ConsumerWidget {
         body: SafeArea(
           child: Column(
             children: [
-              const SizedBox(height: 80),
+              const SizedBox(height: 40),
               Hero(
                   tag: 'appLogo',
-                  child: Image.asset('assets/app_icon.png', height: 180)),
+                  child: Image.asset('assets/app_icon.png', height: 150)),
               const SizedBox(height: 24),
               Text(
                 'QuizU',
