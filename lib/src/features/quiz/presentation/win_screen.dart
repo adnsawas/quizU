@@ -35,21 +35,12 @@ class _WinScreenState extends ConsumerState<WinScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 100),
-              AnimatedSwitcher(
-                duration: const Duration(seconds: 1),
-                reverseDuration: const Duration(milliseconds: 200),
-                switchInCurve: Curves.elasticOut,
-                switchOutCurve: Curves.ease,
-                transitionBuilder: (child, animation) => ScaleTransition(
-                  scale: animation,
-                  child: child,
+              const Text(
+                '🏅',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 60,
                 ),
-                child: !startAnimation
-                    ? const SizedBox.shrink()
-                    : const Text(
-                        '🏅',
-                        style: TextStyle(fontSize: 70),
-                      ),
               ),
               Card(
                 child: Padding(

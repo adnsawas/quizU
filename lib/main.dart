@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:quiz_u/src/features/profile/domain/profile_score.dart';
 import 'package:quiz_u/src/routing/router.dart';
-import 'package:quiz_u/src/theme/app_colors.dart';
 import 'package:quiz_u/src/theme/app_theme.dart';
 
 import 'package:stack_trace/stack_trace.dart' as stack_trace;

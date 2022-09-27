@@ -37,7 +37,7 @@ class ProfileScreen extends ConsumerWidget {
             ],
           ),
 
-          const SizedBox(height: 12),
+          const SizedBox(height: 16),
           Container(
             decoration: BoxDecoration(
                 border: Border.all(color: AppColors.secondaryColor, width: 2),
@@ -45,6 +45,7 @@ class ProfileScreen extends ConsumerWidget {
                 color: AppColors.smallItemsBackgroundColor),
             child: const Text('👨🏻‍💻', style: TextStyle(fontSize: 70)),
           ),
+          const SizedBox(height: 8),
           Text(userProfile.name!, style: Theme.of(context).textTheme.headline5),
           const SizedBox(height: 8),
           Text(userProfile.mobile,
@@ -57,6 +58,7 @@ class ProfileScreen extends ConsumerWidget {
               style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                   fontWeight: FontWeight.bold,
                   color: AppColors.secondaryColor)),
+          const SizedBox(height: 16),
           // User Scores Details
           Builder(
             builder: (context) {

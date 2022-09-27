@@ -49,7 +49,7 @@ class _LoseScreenState extends State<LoseScreen> {
                         : Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const Text('😵', style: TextStyle(fontSize: 80)),
+                              const Text('😵', style: TextStyle(fontSize: 60)),
                               const SizedBox(height: 24),
                               Text('Game Over',
                                   style: Theme.of(context).textTheme.headline4),

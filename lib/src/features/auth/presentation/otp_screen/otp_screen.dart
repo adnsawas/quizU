@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:quiz_u/src/features/auth/data/auth_repository.dart';
 import 'package:quiz_u/src/features/auth/presentation/main_auth_screen.dart';
 import 'package:quiz_u/src/features/auth/presentation/otp_screen/otp_screen_controller.dart';
-import 'package:quiz_u/src/routing/router.dart';
 import 'package:quiz_u/src/utils/async_value_error_ui.dart';
 
-class OtpScreen extends ConsumerWidget {
-  const OtpScreen({Key? key}) : super(key: key);
+class OtpScreen extends ConsumerStatefulWidget {
+  const OtpScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<OtpScreen> createState() => _OtpScreenState();
+}
+
+class _OtpScreenState extends ConsumerState<OtpScreen> {
+  @override
+  Widget build(BuildContext context) {
     ref.listen<AsyncValue>(
       otpScreenControllerProvider,
       (_, state) => state.showAlertDialogOnError(context),
@@ -47,13 +50,12 @@ class OtpScreen extends ConsumerWidget {
                     onSuccess: () {
                       // if logged in user still does not have a name,
                       // take user to latest step (Enter Name Step)
+                      if (!mounted) {
+                        return;
+                      }
                       if (ref.read(authRepositoryProvider).currentUser?.name ==
                           null) {
                         ref.read(mainAuthStepIndexProvider.notifier).state = 2;
-                      } else {
-                        // if user reached this step and he does have a name
-                        // then just navigate user to home page
-                        context.goNamed(AppRoute.home.name);
                       }
                     },
                   ),

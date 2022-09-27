@@ -24,7 +24,7 @@ class ProfileRepository {
     }
 
     try {
-      final box = await Hive.openBox<String>('users_scores');
+      final box = await Hive.openBox('all_users_scores');
       final String results =
           box.get(_authRepository.currentUser!.mobile) ?? '[]';
       final List resultsJson = jsonDecode(results);
@@ -37,7 +37,7 @@ class ProfileRepository {
           .toList()
           .cast<ProfileScore>();
     } catch (e) {
-      print(e.toString());
+      rethrow;
     }
   }
 
@@ -46,26 +46,30 @@ class ProfileRepository {
       throw 'No logged in user to write any data';
     }
 
-    final box = await Hive.openBox<String>('users_scores');
-    final newUserScores = _userScores.value;
-    newUserScores.add(ProfileScore(time: DateTime.now(), score: newScore));
-    // convert newUserScores to JSON
-    final newUserScoresJson = jsonEncode(newUserScores);
-    // save score in box,
-    box.put(_authRepository.currentUser!.mobile, newUserScoresJson);
-    // update [_userScores as well]
-    _userScores.value = newUserScores;
+    try {
+      final box = await Hive.openBox('all_users_scores');
+      final newUserScores = List.from(_userScores.value).cast<ProfileScore>();
+      newUserScores.add(ProfileScore(time: DateTime.now(), score: newScore));
+      // convert newUserScores to JSON
+      final newUserScoresJson = jsonEncode(newUserScores);
+      // save score in box,
+      box.put(_authRepository.currentUser!.mobile, newUserScoresJson);
+      // update [_userScores as well]
+      _userScores.value = newUserScores;
+    } catch (e) {
+      rethrow;
+    }
   }
 }
 
-final profileRepositoryProvider =
-    Provider.autoDispose<ProfileRepository>((ref) {
+final profileRepositoryProvider = Provider<ProfileRepository>((ref) {
   final authRepository = ref.watch(authRepositoryProvider);
-  return ProfileRepository(authRepository)..fetchUserScores();
+  return ProfileRepository(authRepository);
 });
 
 final profileScroesStreamProvider =
     StreamProvider.autoDispose<List<ProfileScore>>((ref) {
-  final profileRepository = ref.watch(profileRepositoryProvider);
+  final profileRepository = ref.watch(profileRepositoryProvider)
+    ..fetchUserScores();
   return profileRepository._userScores.stream;
 });

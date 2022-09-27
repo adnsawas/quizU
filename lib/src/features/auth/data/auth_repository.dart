@@ -59,9 +59,6 @@ class AuthRepository {
       });
       final jsonResponse = jsonDecode(response.body);
       if (response.statusCode == 201 && jsonResponse['success']) {
-        // save user info in _authState
-        _authState.value = LoggedUser.fromJson(jsonResponse);
-
         // return token to [AuthService] to persist it
         return jsonResponse['token'];
       } else {
