@@ -18,7 +18,7 @@ class QuizTimer {
   final InMemoryStore<int> remainingTimeInSeconds;
 
   void startTimer() {
-    finishTime = DateTime.now().add(duration);
+    finishTime = DateTime.now().add(duration).add(const Duration(seconds: 1));
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       remainingTimeInSeconds.value =
           finishTime.difference(DateTime.now()).inSeconds;
@@ -34,7 +34,7 @@ class QuizTimer {
 }
 
 final quizTimerProvider = Provider.autoDispose<QuizTimer>((ref) {
-  return QuizTimer(duration: const Duration(seconds: 5));
+  return QuizTimer();
 });
 
 final remainingTimeInSecondsStreamProvider =
