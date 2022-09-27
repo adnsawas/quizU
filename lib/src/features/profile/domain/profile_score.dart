@@ -1,15 +1,7 @@
-// ignore: depend_on_referenced_packages
-import 'package:hive/hive.dart';
-
-part 'profile_score.g.dart';
-
-@HiveType(typeId: 1)
 class ProfileScore {
   ProfileScore({required this.time, required this.score});
-  @HiveField(0)
   final DateTime time;
 
-  @HiveField(1)
   final int score;
 
   Map<String, dynamic> toJson() {

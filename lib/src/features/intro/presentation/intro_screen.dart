@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:quiz_u/src/features/intro/presentation/intro_item.dart';
 import 'package:quiz_u/src/routing/router.dart';
 import 'package:quiz_u/src/theme/app_colors.dart';
 import 'package:concentric_transition/concentric_transition.dart';
@@ -15,9 +16,9 @@ class IntroScreen extends StatelessWidget {
       body: ConcentricPageView(
         colors: const [
           AppColors.backgroundColor,
-          AppColors.secondaryColor,
           AppColors.primaryColor,
-          AppColors.backgroundColor,
+          AppColors.smallItemsBackgroundColor,
+          AppColors.primaryColor,
         ],
         pageController: _controller,
         itemCount: 3,
@@ -41,25 +42,20 @@ class IntroScreen extends StatelessWidget {
 }
 
 final pages = <Widget>[
-  Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(Icons.home, size: 80),
-        Text('Screen 1'),
-      ]),
-  Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(Icons.query_builder, size: 80),
-        Text('Screen 2'),
-      ]),
-  Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(Icons.text_snippet_outlined, size: 80),
-        Text('Screen 3'),
-      ]),
+  const IntroItem(
+    imagePath: 'assets/intro/intro_1.png',
+    title: 'Welcome to QuizU',
+    description: 'Test your knowldge in Tech industry through a timed quiz',
+  ),
+  const IntroItem(
+    imagePath: 'assets/intro/intro_2.png',
+    title: 'Answer Quickly',
+    description: 'Solve as many questions as you can in just 2 minutes',
+  ),
+  const IntroItem(
+    imagePath: 'assets/intro/intro_3.png',
+    title: 'Climb the Leaderboard',
+    description:
+        'Challenge others for highest scores and get into leaderboard list',
+  ),
 ];

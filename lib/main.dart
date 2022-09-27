@@ -30,7 +30,6 @@ void main() async {
 
     // initialize local sorage
     await Hive.initFlutter();
-    Hive.registerAdapter(ProfileScoreAdapter());
 
     runApp(const ProviderScope(child: MyApp()));
 
