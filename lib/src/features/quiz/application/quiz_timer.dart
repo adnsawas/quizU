@@ -34,7 +34,7 @@ class QuizTimer {
 }
 
 final quizTimerProvider = Provider.autoDispose<QuizTimer>((ref) {
-  return QuizTimer(duration: const Duration(seconds: 120));
+  return QuizTimer(duration: const Duration(seconds: 15));
 });
 
 final remainingTimeInSecondsStreamProvider =

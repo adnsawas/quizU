@@ -18,7 +18,7 @@ class QuizHomeScreen extends StatelessWidget {
             const SizedBox(height: 60),
             Hero(
                 tag: 'appLogo',
-                child: Image.asset('assets/app_icon.png', height: 180)),
+                child: Image.asset('assets/app_icon.png', height: 120)),
             const SizedBox(height: 24),
             Text(
               'QuizU',

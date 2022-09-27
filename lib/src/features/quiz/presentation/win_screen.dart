@@ -48,7 +48,7 @@ class _WinScreenState extends ConsumerState<WinScreen> {
                     ? const SizedBox.shrink()
                     : const Text(
                         '🏅',
-                        style: TextStyle(fontSize: 120),
+                        style: TextStyle(fontSize: 80),
                       ),
               ),
               Card(

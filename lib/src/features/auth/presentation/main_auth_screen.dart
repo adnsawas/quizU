@@ -30,7 +30,7 @@ class MainAuthScreen extends ConsumerWidget {
               const SizedBox(height: 40),
               Hero(
                   tag: 'appLogo',
-                  child: Image.asset('assets/app_icon.png', height: 150)),
+                  child: Image.asset('assets/app_icon.png', height: 120)),
               const SizedBox(height: 24),
               Text(
                 'QuizU',

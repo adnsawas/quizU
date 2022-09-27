@@ -27,7 +27,7 @@ class LoggedUser {
   factory LoggedUser.fromJson(Map<String, dynamic> map) {
     return LoggedUser(
       map['name'] != null ? map['name'] as String : null,
-      map['mobile'] as String,
+      map['mobile'],
     );
   }
 

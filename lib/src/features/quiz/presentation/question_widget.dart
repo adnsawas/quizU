@@ -23,7 +23,7 @@ class QuestionWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: question.answers.entries.map<Widget>((answer) {
             return Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                   onPressed: () {
                     if (onAnswer != null) {

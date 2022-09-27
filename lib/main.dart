@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:quiz_u/src/features/profile/domain/profile_score.dart';
 import 'package:quiz_u/src/routing/router.dart';
+import 'package:quiz_u/src/theme/app_colors.dart';
 import 'package:quiz_u/src/theme/app_theme.dart';
 
 import 'package:stack_trace/stack_trace.dart' as stack_trace;
@@ -17,6 +19,14 @@ void main() async {
       if (stack is stack_trace.Chain) return stack.toTrace().vmTrace;
       return stack;
     };
+
+    // SystemUIOverlay
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+      ),
+    );
 
     // initialize local sorage
     await Hive.initFlutter();
@@ -41,6 +51,8 @@ void main() async {
   }, (error, stack) {});
 }
 
+final _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
@@ -55,6 +67,8 @@ class MyApp extends ConsumerWidget {
       onGenerateTitle: (context) => 'QuizU',
       themeMode: ThemeMode.dark,
       darkTheme: appTheme(context),
+      title: 'QuizU',
+      scaffoldMessengerKey: _scaffoldMessengerKey,
     );
   }
 }

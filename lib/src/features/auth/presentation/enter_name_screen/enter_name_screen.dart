@@ -40,7 +40,7 @@ class _EnterNameScreenState extends ConsumerState<EnterNameScreen> {
           keyboardType: TextInputType.name,
         ),
         const SizedBox(height: 20),
-        OutlinedButton(
+        ElevatedButton(
             onPressed: state.isLoading
                 ? null
                 : () {

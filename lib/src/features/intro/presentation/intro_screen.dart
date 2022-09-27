@@ -44,16 +44,22 @@ final pages = <Widget>[
   Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [Icon(Icons.home, size: 80), Text('Screen 1')]),
+      children: [
+        Icon(Icons.home, size: 80),
+        Text('Screen 1'),
+      ]),
   Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [Icon(Icons.query_builder, size: 80), Text('Screen 2')]),
+      children: [
+        Icon(Icons.query_builder, size: 80),
+        Text('Screen 2'),
+      ]),
   Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(Icons.text_snippet_outlined, size: 80),
-        Text('Screen 3')
+        Text('Screen 3'),
       ]),
 ];

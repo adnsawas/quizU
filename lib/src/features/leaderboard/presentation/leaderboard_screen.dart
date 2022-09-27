@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:quiz_u/src/common_widgets/animated_list_item.dart';
 import 'package:quiz_u/src/common_widgets/async_value_widget.dart';
 import 'package:quiz_u/src/common_widgets/empty_results_widget.dart';
 import 'package:quiz_u/src/features/leaderboard/data/leaderboard_repository.dart';
@@ -49,22 +50,24 @@ class LeaderboardScreen extends ConsumerWidget {
                           child: ListView.builder(
                             itemBuilder: (context, index) {
                               final leaderboardResult = data[index];
-                              return ListTile(
-                                title: Text(
-                                  leaderboardResult.name,
-                                  style:
-                                      Theme.of(context).textTheme.titleMedium,
+                              return AnimatedListItem(
+                                child: ListTile(
+                                  title: Text(
+                                    leaderboardResult.name,
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                                  leading: CircleAvatar(
+                                      backgroundColor: AppColors.primaryColor,
+                                      foregroundColor: Colors.white,
+                                      child: Text('${index + 1}')),
+                                  trailing: Text(
+                                      leaderboardResult.score == null
+                                          ? 'N/A'
+                                          : leaderboardResult.score.toString(),
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold)),
                                 ),
-                                leading: CircleAvatar(
-                                    backgroundColor: AppColors.primaryColor,
-                                    foregroundColor: Colors.white,
-                                    child: Text('${index + 1}')),
-                                trailing: Text(
-                                    leaderboardResult.score == null
-                                        ? 'N/A'
-                                        : leaderboardResult.score.toString(),
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold)),
                               );
                             },
                             itemCount: data.length,

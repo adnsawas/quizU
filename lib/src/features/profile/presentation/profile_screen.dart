@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:quiz_u/src/common_widgets/animated_list_item.dart';
 import 'package:quiz_u/src/common_widgets/async_value_widget.dart';
 import 'package:quiz_u/src/common_widgets/empty_results_widget.dart';
 import 'package:quiz_u/src/features/auth/data/auth_repository.dart';
@@ -74,17 +75,20 @@ class ProfileScreen extends ConsumerWidget {
                               child: ListView.builder(
                                 itemBuilder: (context, index) {
                                   final score = scores[index];
-                                  return ListTile(
-                                    title: Text(
-                                      DateFormat('MMM d, yyyy - h:mm a')
-                                          .format(score.time),
-                                      style:
-                                          Theme.of(context).textTheme.headline6,
-                                    ),
-                                    trailing: Text(score.score.toString(),
+                                  return AnimatedListItem(
+                                    child: ListTile(
+                                      title: Text(
+                                        DateFormat('MMM d, yyyy - h:mm a')
+                                            .format(score.time),
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline6),
+                                            .headline6,
+                                      ),
+                                      trailing: Text(score.score.toString(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline6),
+                                    ),
                                   );
                                 },
                                 itemCount: scores.length,
