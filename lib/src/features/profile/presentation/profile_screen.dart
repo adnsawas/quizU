@@ -43,7 +43,7 @@ class ProfileScreen extends ConsumerWidget {
                 border: Border.all(color: AppColors.secondaryColor, width: 2),
                 shape: BoxShape.circle,
                 color: AppColors.smallItemsBackgroundColor),
-            child: const Text('👨🏻‍💻', style: TextStyle(fontSize: 90)),
+            child: const Text('👨🏻‍💻', style: TextStyle(fontSize: 70)),
           ),
           Text(userProfile.name!, style: Theme.of(context).textTheme.headline5),
           const SizedBox(height: 8),

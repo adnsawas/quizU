@@ -5,6 +5,9 @@ import 'package:quiz_u/src/routing/router.dart';
 import 'package:quiz_u/src/theme/app_colors.dart';
 import 'package:concentric_transition/concentric_transition.dart';
 
+// Disclaimer: Intro Images by pikisuperstar on Freepik
+// https://www.freepik.com/free-vector/mobile-app-concept_4185643.htm#page=2&query=app%20flat%20design%20login&position=32&from_view=search
+
 class IntroScreen extends StatelessWidget {
   IntroScreen({super.key});
 

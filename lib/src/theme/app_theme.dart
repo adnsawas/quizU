@@ -66,6 +66,7 @@ ThemeData appTheme(BuildContext context) {
           foregroundColor: const MaterialStatePropertyAll(Colors.white)),
     ),
     inputDecorationTheme: const InputDecorationTheme(
+        labelStyle: TextStyle(color: Colors.white),
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.secondaryColor))),
   );

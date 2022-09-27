@@ -1,3 +1,4 @@
+import 'package:concentric_transition/page_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -69,13 +70,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         GoRoute(
           path: '/auth',
           name: AppRoute.auth.name,
-          pageBuilder: (context, state) => CustomTransitionPage(
-            child: MainAuthScreen(),
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) =>
-                    ScaleTransition(scale: animation, child: child),
-            transitionDuration: const Duration(milliseconds: 500),
-          ),
+          builder: (context, state) => MainAuthScreen(),
         ),
         GoRoute(
           path: '/intro',

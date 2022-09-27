@@ -20,10 +20,17 @@ class OtpScreen extends ConsumerWidget {
 
     final state = ref.watch(otpScreenControllerProvider);
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    return ListView(
+      // mainAxisAlignment: MainAxisAlignment.center,
+      // crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        const SizedBox(height: 24),
+        Text(
+          'Enter one time code you received',
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        const SizedBox(height: 24),
         PinCodeTextField(
           length: 4,
           enabled: !state.isLoading,
@@ -57,8 +64,9 @@ class OtpScreen extends ConsumerWidget {
         ],
         const SizedBox(height: 36),
         ElevatedButton(
-            onPressed: () =>
-                ref.read(mainAuthStepIndexProvider.notifier).state = 0,
+            onPressed: state.isLoading
+                ? null
+                : () => ref.read(mainAuthStepIndexProvider.notifier).state = 0,
             child: const Text('Back'))
       ],
     );

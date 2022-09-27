@@ -8,6 +8,7 @@ extension AsyncValueUI on AsyncValue {
           context: context,
           builder: (context) {
             return AlertDialog(
+              contentPadding: const EdgeInsets.all(16),
               title: const Text('Error'),
               content: Text(error.toString()),
               actions: [

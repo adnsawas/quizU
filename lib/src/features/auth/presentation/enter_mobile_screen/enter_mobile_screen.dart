@@ -15,6 +15,16 @@ class EnterMobileScreen extends ConsumerStatefulWidget {
 class _EnterMobileScreenState extends ConsumerState<EnterMobileScreen> {
   final _mobileController = TextEditingController();
 
+  void submit() {
+    ref.read(enterMobileScreenControllerProvider.notifier).submitMobile(
+        mobile: _mobileController.text,
+        onSuccess: () {
+          FocusScope.of(context).unfocus();
+          // Show next page by updating the PageController index
+          ref.read(mainAuthStepIndexProvider.notifier).state = 1;
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     ref.listen<EnterMobileScreenState>(
@@ -23,62 +33,62 @@ class _EnterMobileScreenState extends ConsumerState<EnterMobileScreen> {
     );
 
     final state = ref.watch(enterMobileScreenControllerProvider);
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        // Mobile Text Field
-        TextFormField(
-          controller: _mobileController,
-          keyboardType: TextInputType.phone,
-          decoration: InputDecoration(
-              labelText: 'Mobile',
-              hintText: '53 555 5555',
-              border: const OutlineInputBorder(),
-              prefixIcon: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: RegionWidget(
-                      initialRegion: state.region,
-                      onChange: (region) {
-                        ref
-                            .read(enterMobileScreenControllerProvider.notifier)
-                            .updateRegion(region);
-                      },
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 24),
+          Text(
+            'Enter your mobile number',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          const SizedBox(height: 24),
+          // Mobile Text Field
+          TextFormField(
+            controller: _mobileController,
+            keyboardType: TextInputType.phone,
+            onFieldSubmitted: (value) => submit,
+            decoration: InputDecoration(
+                labelText: 'Mobile',
+                hintText: '53 555 5555',
+                border: const OutlineInputBorder(),
+                prefixIcon: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: RegionWidget(
+                        initialRegion: state.region,
+                        onChange: (region) {
+                          ref
+                              .read(
+                                  enterMobileScreenControllerProvider.notifier)
+                              .updateRegion(region);
+                        },
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 8),
-                  const VerticalDivider(color: Colors.grey),
-                ],
+                    const SizedBox(width: 8),
+                    const VerticalDivider(color: Colors.grey),
+                  ],
+                )),
+          ),
+
+          if (state.value.isLoading) ...[
+            const SizedBox(height: 40),
+            const Center(child: CircularProgressIndicator()),
+          ],
+          const SizedBox(height: 30),
+          // Submit Button
+          ElevatedButton(
+              onPressed: state.value.isLoading ? null : () => submit(),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Start'),
               )),
-        ),
-        const SizedBox(height: 30),
-        // Submit Button
-        ElevatedButton(
-            onPressed: state.value.isLoading
-                ? null
-                : () {
-                    ref
-                        .read(enterMobileScreenControllerProvider.notifier)
-                        .submitMobile(
-                            mobile: _mobileController.text,
-                            onSuccess: () {
-                              FocusScope.of(context).unfocus();
-                              // Show next page by updating the PageController index
-                              ref
-                                  .read(mainAuthStepIndexProvider.notifier)
-                                  .state = 1;
-                            });
-                  },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: state.value.isLoading
-                  ? const CircularProgressIndicator()
-                  : const Text('Start'),
-            )),
-      ],
+        ],
+      ),
     );
   }
 
