@@ -30,7 +30,8 @@ class LeaderboardScreen extends ConsumerWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const Text('🏆', style: TextStyle(fontSize: 75)),
+                            const Text('🏆', style: TextStyle(fontSize: 70)),
+                            const SizedBox(height: 8),
                             Text('Leaderboard',
                                 style: Theme.of(context)
                                     .textTheme

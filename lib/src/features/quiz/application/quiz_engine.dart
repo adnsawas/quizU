@@ -47,7 +47,7 @@ class QuizEngine {
   // method to start quiz
   void startQuiz() {
     // fill [questions] (shuffled)
-    questions = quizRepository.questions.value..shuffle();
+    questions = List.from(quizRepository.questions.value)..shuffle();
     // fill [currentQuestion]
     currentQuestion.value = questions.removeLast();
     // start timer
@@ -105,6 +105,9 @@ final quizEngineProvider = Provider.autoDispose<QuizEngine>((ref) {
   final quizRepository = ref.watch(quizRepositoryProvider);
   final quizTimer = ref.watch(quizTimerProvider);
   final profileRepository = ref.watch(profileRepositoryProvider);
+  ref.onDispose(
+    () => quizTimer.stopTimer(),
+  );
   return QuizEngine(
       quizRepository: quizRepository,
       quizTimer: quizTimer,
